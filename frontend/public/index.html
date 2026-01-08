@@ -14,8 +14,9 @@
   </style>
 </head>
 <body class="flex min-h-screen bg-gray-100">
+
 <div id="overlay" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden"></div>
-<!-- SIDEBAR -->
+
 <aside class="w-64 bg-purple-800 text-white flex flex-col">
   <div class="p-6 font-bold text-xl">SPK Gudang<br><span class="text-sm">Metode SAW</span></div>
   <nav class="flex-1 space-y-1 px-4">
@@ -24,16 +25,11 @@
     <button class="menu w-full text-left px-4 py-2 rounded" onclick="showSection('cabang')" id="nav-cabang">Data Cabang</button>
     <button class="menu w-full text-left px-4 py-2 rounded" onclick="showSection('kriteria')" id="nav-kriteria">Kriteria & Bobot</button>
     <button class="menu w-full text-left px-4 py-2 rounded" onclick="showSection('hasil')" id="nav-hasil">Hasil SAW</button>
-    
-
   </nav>
-
 </aside>
 
-<!-- CONTENT -->
 <main class="flex-1 p-8">
 
-<!-- DASHBOARD -->
 <section id="dashboard" class="section active">
   <h1 class="text-2xl font-bold mb-6">Dashboard SPK Gudang</h1>
   <div class="grid grid-cols-4 gap-4 mb-6">
@@ -65,13 +61,11 @@
   </table>
 </section>
 
-  <!-- DATA PENJUALAN -->
- <section id="penjualan" class="section">
+<section id="penjualan" class="section">
   <div class="flex justify-between items-center mb-4">
     <h1 class="text-2xl font-bold">Data Penjualan</h1>
     <button onclick="showPenjualanForm()" class="bg-blue-600 text-white px-4 py-2 rounded">+ Tambah Data</button>
   </div>
-
   <div id="penjualan-list" class="bg-white rounded shadow p-4">
     <table class="w-full border text-sm">
       <thead class="bg-purple-600 text-white">
@@ -94,15 +88,10 @@
       <h3 class="text-lg font-bold">Form Penjualan</h3>
       <button onclick="showPenjualanList()" class="bg-gray-500 text-white px-3 py-1 rounded">← Kembali</button>
     </div>
-
-    <input type="hidden" id="penjualan_id">
-
     <div class="grid grid-cols-2 gap-4">
       <div>
         <label>Cabang</label>
-        <select id="cabangJual" class="w-full border p-2 rounded">
-          <option value="">-- Pilih Cabang --</option>
-        </select>
+        <select id="cabangJual" class="w-full border p-2 rounded"></select>
       </div>
       <div>
         <label>Produk</label>
@@ -113,150 +102,70 @@
         <input type="number" id="jumlahJual" class="w-full border p-2 rounded">
       </div>
     </div>
-
     <div class="mt-6 flex justify-end gap-2">
       <button onclick="tambahPenjualan()" class="bg-blue-600 text-white px-6 py-2 rounded">Simpan</button>
-      <button onclick="resetPenjualanForm()" class="bg-gray-400 text-white px-6 py-2 rounded">Reset</button>
     </div>
   </div>
 </section>
 
-  <!-- DATA CABANG -->
-  <section id="cabang" class="section">
+<section id="cabang" class="section">
     <h1 class="text-2xl font-bold mb-4">Data Cabang</h1>
-    <button onclick="showFormCabang()" class="bg-green-600 text-white px-4 py-2 rounded mb-3">
-  Tambah Cabang
-</button>
+    <button onclick="showFormCabang()" class="bg-green-600 text-white px-4 py-2 rounded mb-3">Tambah Cabang</button>
     <table class="w-full bg-white rounded shadow text-sm border">
-      <thead class="bg-purple-600 text-white">
-        <tr>
-          <th class="p-2">No</th>
-          <th class="p-2">Kode Cabang</th>
-          <th class="p-2">Nama Cabang</th>
-          <th class="p-2">Alamat</th>
-          <th class="p-2">Aksi</th>
-        </tr>
-      </thead>
-      <tbody id="tblCabang"></tbody>
+        <thead class="bg-purple-600 text-white">
+            <tr>
+                <th class="p-2">No</th>
+                <th class="p-2">Kode</th>
+                <th class="p-2">Nama</th>
+                <th class="p-2">Alamat</th>
+                <th class="p-2">Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="tblCabang"></tbody>
     </table>
-    <div id="formCabang" class="hidden bg-white rounded shadow p-6">
-    <div class="flex justify-between mb-4">
-      <h3 class="text-lg font-bold text-blue-600">Form Cabang</h3>
-      <button onclick="showCabangList()" class="bg-gray-500 text-white px-3 py-1 rounded">← Kembali</button>
-    </div>
-
-    <input type="hidden" id="cabang_id">
-
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label>Kode Cabang</label>
-        <input id="kodeCabang" class="w-full border p-2 rounded" placeholder="CB01">
-      </div>
-      <div>
-        <label>Nama Cabang</label>
-        <input id="namaCabang" class="w-full border p-2 rounded" placeholder="Cabang Jakarta">
-      </div>
-      <div class="col-span-2">
-        <label>Alamat</label>
-        <textarea id="alamatCabang" class="w-full border p-2 rounded" placeholder="Alamat cabang"></textarea>
-      </div>
-    </div>
-
-    <div class="mt-6 flex justify-end gap-2">
-      <button onclick="tambahCabang()" class="bg-blue-600 text-white px-6 py-2 rounded">Simpan</button>
-      <button onclick="resetCabangForm()" class="bg-gray-400 text-white px-6 py-2 rounded">Reset</button>
-    </div>
-  </div>
-</div>
-  </section>
-
-  <!-- DATA KRITERIA -->
-  <section id="kriteria" class="section">
-    <h1 class="text-2xl font-bold mb-4">Data Kriteria</h1>
-    <button onclick="showFormKriteria()" class="bg-green-600 text-white px-4 py-2 rounded mb-3">
-  Tambah Kriteria
-</button>
-    <table class="w-full bg-white rounded shadow text-sm border">
-      <thead class="bg-blue-600 text-white">
-        <tr>
-          <th class="p-2">No</th>
-          <th class="p-2">Kode</th>
-          <th class="p-2">Nama Kriteria</th>
-          <th class="p-2">Type</th>
-          <th class="p-2">Bobot</th>
-          <th class="p-2">Cara Penilaian</th>
-          <th class="p-2">Aksi</th>
-        </tr>
-      </thead>
-      <tbody id="tblKriteria"></tbody>
-    </table>
-        <div id="formKriteria" class="hidden bg-white rounded shadow p-6">
-    <div class="flex justify-between mb-4">
-      <h3 class="text-lg font-bold text-blue-600">Form Kriteria</h3>
-      <button onclick="showKriteriaList()" class="bg-gray-500 text-white px-3 py-1 rounded">← Kembali</button>
-    </div>
-
-    <input type="hidden" id="kriteria_id">
-
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label>Kode Kriteria</label>
-        <input id="kodeKriteria" class="w-full border p-2 rounded">
-      </div>
-      <div>
-        <label>Nama Kriteria</label>
-        <input id="namaKriteria" class="w-full border p-2 rounded">
-      </div>
-      <div>
-        <label>Type</label>
-        <select id="tipeKriteria" class="w-full border p-2 rounded">
-          <option value="">-- Pilih Type --</option>
-          <option value="benefit">Benefit</option>
-          <option value="cost">Cost</option>
-        </select>
-      </div>
-      <div>
-        <label>Bobot</label>
-        <input type="number" step="0.01" id="bobotKriteria" class="w-full border p-2 rounded">
-      </div>
-      <div class="col-span-2">
-        <label>Cara Penilaian</label>
-        <input id="caraKriteria" class="w-full border p-2 rounded">
-      </div>
-    </div>
-
-    <div class="mt-6 flex justify-end gap-2">
-      <button onclick="tambahKriteria()" class="bg-blue-600 text-white px-6 py-2 rounded">Simpan</button>
-      <button onclick="resetKriteriaForm()" class="bg-gray-400 text-white px-6 py-2 rounded">Reset</button>
-    </div>
-  </div>
-  </section>
-
-  <!-- HASIL SAW -->
- <section id="hasil" class="section">
-  <h1 class="text-2xl font-bold mb-4">Hasil SAW</h1>
-
-  <div class="mb-4">
-    <button onclick="runHitungSAW('hasil')" class="bg-purple-600 text-white px-4 py-2 rounded">Mulai Hitung SAW</button>
-    <button onclick="cetakPDF()" class="bg-green-600 text-white px-4 py-2 rounded ml-2">Cetak PDF</button>
-  </div>
-
-  <table class="w-full bg-white rounded shadow border text-sm">
-    <thead class="bg-purple-200">
-      <tr>
-        <th class="p-2">Ranking</th>
-        <th class="p-2">Cabang</th>
-        <th class="p-2">Nilai</th>
-      </tr>
-    </thead>
-    <tbody id="hasil-ranking-body"></tbody>
-  </table>
 </section>
-<canvas id="rankingChart" height="150"></canvas>
+
+<section id="kriteria" class="section">
+    <h1 class="text-2xl font-bold mb-4">Data Kriteria</h1>
+    <table class="w-full bg-white rounded shadow text-sm border">
+        <thead class="bg-blue-600 text-white">
+            <tr>
+                <th class="p-2">No</th>
+                <th class="p-2">Kode</th>
+                <th class="p-2">Nama</th>
+                <th class="p-2">Tipe</th>
+                <th class="p-2">Bobot</th>
+                <th class="p-2">Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="tblKriteria"></tbody>
+    </table>
+</section>
+
+<section id="hasil" class="section">
+    <h1 class="text-2xl font-bold mb-4">Hasil SAW</h1>
+    <button onclick="runHitungSAW('hasil')" class="bg-purple-600 text-white px-4 py-2 rounded mb-4">Hitung Ulang</button>
+    <table class="w-full bg-white rounded shadow border text-sm">
+        <thead class="bg-purple-200">
+            <tr>
+                <th class="p-2">Ranking</th>
+                <th class="p-2">Cabang</th>
+                <th class="p-2">Nilai</th>
+            </tr>
+        </thead>
+        <tbody id="hasil-ranking-body"></tbody>
+    </table>
+</section>
+
 </main>
 
 <script>
-  
+// ===== KONFIGURASI API (MENGGUNAKAN RELATIVE URL) =====
+const API_CABANG = "/api/cabang";
+const API_PENJUALAN = "/api/penjualan";
+const API_KRITERIA = "/api/kriteria";
+const API_SAW = "/api/saw";
+
 // ===== NAVIGASI =====
 function showSection(id){
   document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
@@ -266,140 +175,107 @@ function showSection(id){
   if(nav) nav.classList.add("active");
 }
 
-// ===== RESET FORM =====
-function resetPenjualanForm(){
-  document.getElementById("penjualan_id").value = "";
-  document.getElementById("cabangJual").value = "";
-  document.getElementById("produkJual").value = "";
-  document.getElementById("jumlahJual").value = "";
-}
-function resetCabangForm(){
-  document.getElementById("cabang_id").value = "";
-  document.getElementById("kodeCabang").value = "";
-  document.getElementById("namaCabang").value = "";
-  document.getElementById("alamatCabang").value = "";
-}
-function resetKriteriaForm(){
-  document.getElementById("kriteria_id").value = "";
-  document.getElementById("kodeKriteria").value = "";
-  document.getElementById("namaKriteria").value = "";
-  document.getElementById("tipeKriteria").value = "";
-  document.getElementById("bobotKriteria").value = "";
-  document.getElementById("caraKriteria").value = "";
+// ===== LOAD DASHBOARD =====
+async function loadDashboard() {
+  try {
+    const cabang = await fetch(API_CABANG).then(r => r.json());
+    document.getElementById("totalCabang").innerText = cabang.length || 0;
+
+    const penjualan = await fetch(API_PENJUALAN).then(r => r.json());
+    document.getElementById("totalPenjualan").innerText = penjualan.length || 0;
+
+    const kriteria = await fetch(API_KRITERIA).then(r => r.json());
+    document.getElementById("totalKriteria").innerText = kriteria.length || 0;
+
+    loadRanking("dashboard");
+  } catch (err) { console.error("Error Dashboard:", err); }
 }
 
-// ===== SHOW FORM =====
-function showPenjualanForm(){ 
-  document.getElementById("penjualan-list").classList.add("hidden"); 
-  document.getElementById("penjualan-form").classList.remove("hidden"); 
-}
-function showPenjualanList(){ 
-  document.getElementById("penjualan-form").classList.add("hidden"); 
-  document.getElementById("penjualan-list").classList.remove("hidden"); 
-}
-function showFormCabang(){ document.getElementById("formCabang").classList.toggle("hidden"); }
-function showCabangList(){ document.getElementById("formCabang").classList.add("hidden"); }
-function showFormKriteria(){ document.getElementById("formKriteria").classList.toggle("hidden"); }
-function showKriteriaList(){ document.getElementById("formKriteria").classList.add("hidden"); }
-
-// ===== API ENDPOINT =====
-const API_CABANG = "http://localhost:3000/api/cabang";
-const API_PENJUALAN = "http://localhost:3000/api/penjualan";
-const API_KRITERIA = "http://localhost:3000/api/kriteria";
-const API_SAW = "http://localhost:3000/api/saw";
-
-// ===== LOAD CABANG =====
+// ===== LOAD DATA CABANG =====
 async function loadCabang(){
-  const res = await fetch(API_CABANG);
-  const data = await res.json();
+  try {
+    const res = await fetch(API_CABANG);
+    const data = await res.json();
+    const select = document.getElementById("cabangJual");
+    select.innerHTML = `<option value="">-- Pilih Cabang --</option>`;
+    data.forEach(c => select.innerHTML += `<option value="${c.id}">${c.nama_cabang}</option>`);
 
-  const select = document.getElementById("cabangJual");
-  select.innerHTML = `<option value="">-- Pilih Cabang --</option>`;
-  data.forEach(c => select.innerHTML += `<option value="${c.id}">${c.nama_cabang}</option>`);
-
-  const tbody = document.getElementById("tblCabang");
-  tbody.innerHTML = "";
-  data.forEach((c,i)=>{
-    tbody.innerHTML += `
-      <tr>
-        <td class="border p-2">${i+1}</td>
-        <td class="border p-2">${c.kode_cabang}</td>
-        <td class="border p-2">${c.nama_cabang}</td>
-        <td class="border p-2">${c.alamat}</td>
-        <td class="border p-2 text-center">
-          <button onclick="editCabang(${c.id})" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
-          <button onclick="hapusCabang(${c.id})" class="bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
-        </td>
-      </tr>
-    `;
-  });
+    const tbody = document.getElementById("tblCabang");
+    tbody.innerHTML = "";
+    data.forEach((c,i)=>{
+        tbody.innerHTML += `<tr>
+            <td class="border p-2">${i+1}</td>
+            <td class="border p-2">${c.kode_cabang}</td>
+            <td class="border p-2">${c.nama_cabang}</td>
+            <td class="border p-2">${c.alamat}</td>
+            <td class="border p-2 text-center">
+                <button onclick="hapusCabang(${c.id})" class="bg-red-600 text-white px-2 py-1 rounded text-xs">Hapus</button>
+            </td>
+        </tr>`;
+    });
+  } catch(err) { console.error(err); }
 }
 
-// ===== TAMBAH CABANG =====
-async function tambahCabang(){
-  const kode = document.getElementById("kodeCabang").value;
-  const nama = document.getElementById("namaCabang").value;
-  const alamat = document.getElementById("alamatCabang").value;
-  if(!kode||!nama||!alamat) return alert("Isi semua data!");
-
-  const res = await fetch(API_CABANG,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({kode_cabang:kode,nama_cabang:nama,alamat})
-  });
-  const result = await res.json();
-  alert(result.message);
-  resetCabangForm();
-  loadCabang();
-}
-// ==================== AKSI CABANG ====================
-async function editCabang(id) {
-  const nama_cabang = prompt("Masukkan nama cabang baru:");
-  const alamat = prompt("Masukkan alamat baru:");
-  if (!nama_cabang || !alamat) return alert("Batal update!");
-
-  const res = await fetch(`http://localhost:3000/api/cabang/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nama_cabang, alamat })
-  });
-
-  const result = await res.json();
-  alert(result.message);
-  loadCabang();
-}
-
-async function hapusCabang(id) {
-  if (!confirm("Yakin hapus cabang ini?")) return;
-
-  const res = await fetch(`http://localhost:3000/api/cabang/${id}`, { method: "DELETE" });
-  const result = await res.json();
-  alert(result.message);
-  loadCabang();
-}
-
-
-// ===== LOAD PENJUALAN =====
+// ===== LOAD DATA PENJUALAN =====
 async function loadPenjualan(){
-  const res = await fetch(API_PENJUALAN);
-  const data = await res.json();
-
-  const tbody = document.getElementById("listPenjualan");
-  tbody.innerHTML="";
-  data.forEach((p,i)=>{
-    tbody.innerHTML += `
-      <tr>
+  try {
+    const res = await fetch(API_PENJUALAN);
+    const data = await res.json();
+    const tbody = document.getElementById("listPenjualan");
+    tbody.innerHTML="";
+    data.forEach((p,i)=>{
+      tbody.innerHTML += `<tr>
         <td class="border p-2">${i+1}</td>
         <td class="border p-2">${p.nama_cabang}</td>
         <td class="border p-2">${p.produk}</td>
         <td class="border p-2">${p.jumlah}</td>
         <td class="border p-2 text-center">
-          <button onclick="editPenjualan(${p.id})" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
-          <button onclick="hapusPenjualan(${p.id})" class="bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
+          <button onclick="hapusPenjualan(${p.id})" class="bg-red-600 text-white px-2 py-1 rounded text-xs">Hapus</button>
         </td>
-      </tr>
-    `;
-  });
+      </tr>`;
+    });
+  } catch(err) { console.error(err); }
+}
+
+// ===== HITUNG SAW =====
+async function runHitungSAW(target) {
+  try {
+    const res = await fetch(`${API_SAW}/hitung`, { method: "POST" });
+    const data = await res.json();
+    
+    // Simpan hasil ke DB
+    await fetch(`${API_SAW}/simpan`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hasil: data.hasil })
+    });
+
+    alert("Perhitungan Selesai!");
+    loadRanking(target);
+  } catch (err) { alert("Gagal hitung!"); }
+}
+
+async function loadRanking(target){
+  try {
+    const res = await fetch(`${API_SAW}/ranking`);
+    const saw = await res.json();
+    const tbodyId = target === "dashboard" ? "dashboard-ranking-body" : "hasil-ranking-body";
+    const tbody = document.getElementById(tbodyId);
+    tbody.innerHTML = "";
+
+    if(!saw.success || !saw.hasil.length) {
+        tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4">Belum ada data</td></tr>`;
+        return;
+    }
+
+    saw.hasil.forEach(r => {
+      tbody.innerHTML += `<tr>
+        <td class="border p-2 text-center">${r.ranking}</td>
+        <td class="border p-2">${r.nama_cabang}</td>
+        <td class="border p-2 text-center">${parseFloat(r.nilai).toFixed(4)}</td>
+      </tr>`;
+    });
+  } catch(err) { console.error(err); }
 }
 
 // ===== TAMBAH PENJUALAN =====
@@ -408,295 +284,24 @@ async function tambahPenjualan(){
   const produk = document.getElementById("produkJual").value;
   const jumlah = document.getElementById("jumlahJual").value;
 
-  if(!cabang || !produk || !jumlah){
-    return alert("Isi semua data!");
-  }
-
-  if(parseInt(jumlah) < 1){
-    return alert("Jumlah terjual tidak boleh 0!");
-  }
-
-  const res = await fetch(API_PENJUALAN,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({cabang_id:cabang, produk, jumlah:parseInt(jumlah)})
+  await fetch(API_PENJUALAN, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cabang_id: cabang, produk, jumlah })
   });
-
-  const result = await res.json();
-  alert(result.message);
-  resetPenjualanForm();
+  loadPenjualan();
   showPenjualanList();
-  loadPenjualan();
-}
-// ==================== AKSI PENJUALAN ====================
-async function editPenjualan(id) {
-  const produk = prompt("Masukkan nama produk baru:");
-  const jumlah = prompt("Masukkan jumlah baru:");
-  if (!produk || !jumlah) return alert("Batal update!");
-
-  const res = await fetch(`http://localhost:3000/api/penjualan/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ produk, jumlah: parseInt(jumlah) })
-  });
-
-  const result = await res.json();
-  alert(result.message);
-  loadPenjualan();
 }
 
-async function hapusPenjualan(id) {
-  if (!confirm("Yakin hapus data penjualan ini?")) return;
+// ===== UI HELPERS =====
+function showPenjualanForm() { document.getElementById("penjualan-list").classList.add("hidden"); document.getElementById("penjualan-form").classList.remove("hidden"); }
+function showPenjualanList() { document.getElementById("penjualan-form").classList.add("hidden"); document.getElementById("penjualan-list").classList.remove("hidden"); }
 
-  const res = await fetch(`http://localhost:3000/api/penjualan/${id}`, { method: "DELETE" });
-  const result = await res.json();
-  alert(result.message);
-  loadPenjualan();
-}
-// ===== LOAD KRITERIA =====
-async function loadKriteria(){
-  const res = await fetch(API_KRITERIA);
-  const data = await res.json();
-
-  const tbody = document.getElementById("tblKriteria");
-  tbody.innerHTML="";
-  data.forEach((k,i)=>{
-    tbody.innerHTML += `
-      <tr>
-        <td class="border p-2">${i+1}</td>
-        <td class="border p-2">${k.kode_kriteria}</td>
-        <td class="border p-2">${k.nama_kriteria}</td>
-        <td class="border p-2">${k.tipe}</td>
-        <td class="border p-2">${k.bobot}</td>
-        <td class="border p-2">${k.cara_penilaian}</td>
-        <td class="border p-2 text-center">
-          <button onclick="editKriteria(${k.id})" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
-          <button onclick="hapusKriteria(${k.id})" class="bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
-        </td>
-      </tr>
-    `;
-  });
-}
-
-// ===== TAMBAH KRITERIA =====
-async function tambahKriteria(){
-  const kode = document.getElementById("kodeKriteria").value;
-  const nama = document.getElementById("namaKriteria").value;
-  const tipe = document.getElementById("tipeKriteria").value;
-  const bobot = document.getElementById("bobotKriteria").value;
-  const cara = document.getElementById("caraKriteria").value;
-  if(!kode||!nama||!tipe||!bobot||!cara) return alert("Isi semua data!");
-
-  const res = await fetch(API_KRITERIA,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({kode_kriteria:kode,nama_kriteria:nama,tipe,bobot,cara_penilaian:cara})
-  });
-  const result = await res.json();
-  alert(result.message);
-  resetKriteriaForm();
-  showKriteriaList();
-  loadKriteria();
-}
-// ==================== AKSI KRITERIA ====================
-async function editKriteria(id) {
-  const nama_kriteria = prompt("Masukkan nama kriteria baru:");
-  const bobot = prompt("Masukkan bobot baru:");
-  if (!nama_kriteria || !bobot) return alert("Batal update!");
-
-  const res = await fetch(`http://localhost:3000/api/kriteria/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nama_kriteria, bobot: parseFloat(bobot) })
-  });
-
-  const result = await res.json();
-  alert(result.message);
-  loadKriteria();
-}
-
-async function hapusKriteria(id) {
-  if (!confirm("Yakin hapus kriteria ini?")) return;
-
-  const res = await fetch(`http://localhost:3000/api/kriteria/${id}`, { method: "DELETE" });
-  const result = await res.json();
-  alert(result.message);
-  loadKriteria();
-}
-
-// ===== HITUNG SAW & TAMPILKAN RANKING =====
-async function runHitungSAW(target){
-  try {
-    console.log("🚀 Hitung SAW dipanggil...");
-    const res = await fetch(API_SAW + "/hitung", { method: "POST" });
-    const data = await res.json();
-    console.log("✅ Response hitung:", data);
-    alert("Perhitungan SAW selesai!");
-
-    console.log("📊 Ambil ranking...");
-    const sawRes = await fetch(API_SAW + "/ranking");
-    const saw = await sawRes.json();
-    console.log("✅ Response ranking:", saw);
-
-    const tbodyId = target === "dashboard" ? "dashboard-ranking-body" : "hasil-ranking-body";
-    const tbody = document.getElementById(tbodyId);
-    tbody.innerHTML = "";
-
-    if(!saw.success || saw.hasil.length === 0){
-      tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4 text-gray-400">Belum ada hasil ranking</td></tr>`;
-      return;
-    }
-
-    saw.hasil.forEach(r => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="border p-2 text-center">${r.ranking}</td>
-          <td class="border p-2">${r.nama_cabang}</td>
-          <td class="border p-2 text-center">${parseFloat(r.nilai).toFixed(4)}</td>
-        </tr>
-      `;
-    });
-
-    console.log("🎉 Ranking berhasil dirender ke tabel!");
-
-  } catch(err){
-    console.error("🔥 Error:", err);
-    alert("Gagal hitung SAW!");
-  }
-}
-
-// ===== CETAK PDF =====
-function cetakPDF(){
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  const rows = [];
-  document.querySelectorAll("#hasil-ranking-body tr").forEach(tr=>{
-    const row=[];
-    tr.querySelectorAll("td").forEach(td=>row.push(td.innerText));
-    rows.push(row);
-  });
-
-  doc.text("Hasil SAW Ranking",14,16);
-  doc.autoTable({ startY:20, head:[["Ranking","Cabang","Nilai"]], body:rows });
-  doc.save("hasil_saw.pdf");
-}
-
-async function loadRanking(target){
-  const saw = await fetch(API_SAW + "/ranking").then(r=>r.json());
-  const tbodyId = target === "dashboard" ? "dashboard-ranking-body" : "hasil-ranking-body";
-  const tbody = document.getElementById(tbodyId);
-  tbody.innerHTML = "";
-
-  if(!saw.success || saw.hasil.length === 0){
-    tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4 text-gray-400">Belum ada hasil ranking</td></tr>`;
-    return;
-  }
-
-  saw.hasil.forEach(r=>{
-    tbody.innerHTML += `
-      <tr>
-        <td class="border p-2 text-center">${r.ranking}</td>
-        <td class="border p-2">${r.nama_cabang}</td>
-        <td class="border p-2 text-center">${parseFloat(r.nilai).toFixed(4)}</td>
-      </tr>
-    `;
-  });
-}
-async function loadDashboard() {
-  try {
-    // TOTAL CABANG
-    const cabang = await fetch("http://localhost:3000/api/cabang").then(r => r.json());
-    document.getElementById("totalCabang").innerText = cabang.length;
-
-    // TOTAL PENJUALAN
-    const penjualan = await fetch("http://localhost:3000/api/penjualan").then(r => r.json());
-    document.getElementById("totalPenjualan").innerText = penjualan.length;
-
-    // TOTAL KRITERIA
-    const kriteria = await fetch("http://localhost:3000/api/kriteria").then(r => r.json());
-    document.getElementById("totalKriteria").innerText = kriteria.length;
-
-    // LOAD RANKING SAW KE TABEL DASHBOARD
-    const saw = await fetch("http://localhost:3000/api/saw/ranking").then(r => r.json());
-
-    const tbody = document.getElementById("dashboard-ranking-body");
-    tbody.innerHTML = "";
-
-    if (!saw.success || saw.hasil.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4 text-gray-400">Belum ada hasil ranking</td></tr>`;
-      return;
-    }
-
-    saw.hasil.forEach((r, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="border p-2 text-center">${r.ranking}</td>
-          <td class="border p-2">${r.nama_cabang}</td>
-          <td class="border p-2 text-center">${parseFloat(r.nilai).toFixed(4)}</td>
-        </tr>
-      `;
-    });
-
-  } catch (err) {
-    console.error("Gagal load dashboard:", err);
-  }
-}
-
-async function runHitungSAW(target) {
-  try {
-    const res = await fetch("http://localhost:3000/api/saw/hitung", { method: "POST" });
-    const data = await res.json();
-    alert("Perhitungan SAW selesai!");
-
-    // SIMPAN HASIL KE DATABASE
-    await fetch("http://localhost:3000/api/saw/simpan", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hasil: data.hasil })
-    });
-
-    // TAMPILKAN KE TABEL HASIL SAW
-    const saw = await fetch("http://localhost:3000/api/saw/ranking").then(r => r.json());
-
-    const tbodyId = target === "dashboard" ? "dashboard-ranking-body" : "hasil-ranking-body";
-    const tbody = document.getElementById(tbodyId);
-    tbody.innerHTML = "";
-
-    if (!saw.success || saw.hasil.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4 text-gray-400">Belum ada hasil ranking</td></tr>`;
-      return;
-    }
-
-    saw.hasil.forEach((r, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="border p-2 text-center">${r.ranking}</td>
-          <td class="border p-2">${r.nama_cabang}</td>
-          <td class="border p-2 text-center">${parseFloat(r.nilai).toFixed(4)}</td>
-        </tr>
-      `;
-    });
-
-  } catch (err) {
-    console.error("Gagal hitung SAW:", err);
-  }
-}
-
-
-// ===== AUTO LOAD =====
-window.onload = ()=>{
+window.onload = () => {
   loadCabang();
   loadPenjualan();
-  loadKriteria();
   loadDashboard();
 };
-
-window.addEventListener("DOMContentLoaded", () => {
-    const overlay = document.getElementById("overlay");
-    if (overlay) overlay.classList.add("hidden"); // sembunyikan overlay
-  });
 </script>
-
-
 </body>
 </html>
