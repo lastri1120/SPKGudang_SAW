@@ -1,7 +1,7 @@
 {
-  "name": "spkgudang_saw",
+ "name": "spkgudang_saw",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "backend/server.js",
   "type": "module",
   "dependencies": {
     "accepts": "^2.0.0",
@@ -86,7 +86,7 @@
   },
   
     "scripts": {
-  "start": "node server.js"
+ "start": "node backend/server.js"
  
   },
   "keywords": [],
